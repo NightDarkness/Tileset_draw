@@ -1,10 +1,11 @@
 import pygame,os,sys,io,numpy,cv2,tempfile
+from pygame.locals import *
 from packages.functions import *
 from packages.player import *
 
 ### --- LECTURA DEL ARCHIVO DE CONFIGURACION Y ASIGNACION DE VARIABLES --- ###
 
-WIDTH,HEIGHT,FPS = readConfigFile()
+WIDTH,HEIGHT,FPS,KEYBINDS = readConfigFile()
 BACKGROUND = (24,20,37)
 TILESIZE = 16
 TEMPPATH = tempfile.TemporaryDirectory()                ### --- DIRECTORIO TEMPORAL --- ###
@@ -34,13 +35,22 @@ clock = pygame.time.Clock()                             ### --- MANEJO DEL RELOJ
 ### --- BUCLE PRINCIPAL --- ###
 
 while True:                                             
-    for event in pygame.event.get():                    ### --- BUCLE QUE MANEJA LOS EVENTOS EN LA APLICACION --- ###
+    for event in pygame.event.get():                   ### --- BUCLE QUE MANEJA LOS EVENTOS EN LA APLICACION --- ###
         if event.type == pygame.QUIT:                   ### --- EVENTO DE CERRADO MEDIANTE CRUZ DE VENTANA --- ###
             pygame.quit()                               ### --- SE FINALIZA PYGAME --- ###
             TEMPPATH.cleanup()                          ### --- SE ELIMINAN LOS ARCHIVOS TEMPORALES --- ###
-            sys.exit()                                  ### --- SE CIERRA LA APLICACION DE RAIZ --- ###
+            sys.exit()
+        
+        if event.type == KEYDOWN:
+            print("preionaste una tecla!")
+            if event.unicode in KEYBINDS:
+                print("y esta dentro de los keybinds! es " + event.unicode + "\n")                                ### --- SE CIERRA LA APLICACION DE RAIZ --- ###
     
     screen.fill(BACKGROUND)                             ### --- SE PINTA EL FONDO --- ###
+
+### --- DETECCION DE TECLAS --- ###
+
+### --- FIN DE TECLAS --- ###
 
 
 ### --- SELECCION DE ESTADOS --- ###

@@ -11,10 +11,11 @@ def readConfigFile():
         WIDTH = config_file[0].strip("WIDTH=\n")
         HEIGHT = config_file[1].strip("HEIGHT=\n")
         FPS = config_file[2].strip("FPS=\n")
+        KEYBINDS = {config_file[6].strip("UP=\n"):"UP", config_file[7].strip("DOWN=\n"):"DOWN", config_file[8].strip("LEFT=\n"):"LEFT", config_file[9].strip("RIGHT=\n"):"RIGHT"}
 
         File.close()
 
-        return int(WIDTH),int(HEIGHT),int(FPS)
+        return int(WIDTH),int(HEIGHT),int(FPS),KEYBINDS
 
     except:
 
